@@ -48,7 +48,8 @@ def create_python_file(response):
             code_block = code_block.replace("dataset.csv", csv_file_path)
             
             # Append code_block to save the plot
-            code_block += '\nplt.savefig(f"{filename}.png")'
+            png_file_path = os.path.join("png_files", f"{filename}.png")
+            code_block += f"\nplt.savefig('{png_file_path}')" 
     
     if code_block is not None:
     # Open the file in write mode ('w') which will overwrite the file if it already exists
@@ -86,26 +87,21 @@ def main():
         df = pd.read_csv(uploaded_file)
         user_input = st.text_input("Enter some text:")
         user_input_gpt = [
-                "Histogram of Student Grades",
-                "Bar Plot of Average Grades by Gender",
-                "Scatter Plot of Study Hours vs. Grades",
-                "Box Plot of Grades by Parental Education Level",
-                "Correlation Heatmap of All Numeric Features",
-                "Bar Plot of Attendance by Gender",
-                "Pie Chart of Students by Socioeconomic Status",
-                "Line Plot of Grade Progression Over Time",
-                "Stacked Bar Plot of Grades by Study Methods",
-                "Box Plot of Grades by Study Group Participation",
-                "Scatter Plot of Internet Usage vs. Grades",
-                "Bar Plot of Average Grades by School Type",
-                "Violin Plot of Grades by Parental Involvement",
-                "Pair Plot of Multiple Variables (Study Hours, Grades, Attendance)",
-                "Density Plot of Hours of Sleep by Gender",
-                "Stacked Bar Plot of Extracurricular Activities vs. Grades",
-                "Pie Chart of Students’ Preferred Learning Styles",
-                "Bar Plot of Average Grades by Classroom Size",
-                "Heatmap of Study Environment Ratings vs. Performance",
-                "Line Plot of Grades Over Time by Gender"
+                "Histogram of App Usage Time (min/day)",
+                "Bar Plot of Average App Usage Time by Device Model",
+                "Scatter Plot of Screen On Time vs. Battery Drain",
+                "Bar Plot of Number of Apps Installed by Operating System",
+                "Box Plot of Screen On Time by Gender",
+                "Correlation Heatmap of Numeric Features (App Usage, Screen On Time, Battery Drain, Data Usage, etc.)",
+                "Bar Plot of Average Data Usage by Age",
+                "Pie Chart of Device Model Distribution",
+                "Bar Plot of Average Battery Drain by User Behavior Class",
+                "Scatter Plot of Age vs. Screen On Time",
+                "Box Plot of Data Usage by Gender",
+                "Line Plot of Average App Usage Time by Age Group",
+                "Stacked Bar Plot of User Behavior Class by Operating System",
+                "Bar Plot of Average Screen On Time by Device Model",
+                "Density Plot of Battery Drain by Gender"
             ]
         # Display the dataframe
         for user_input in user_input_gpt:
@@ -128,7 +124,7 @@ def main():
             if file_path:
                 result = subprocess.run(command, shell=True)
                 if result.returncode == 0:
-                    st.image("plot_output.png")
+                    st.image(os.path.join("png_files",f"{base_path}.png"))
                 else:
                     st.write("Error in running the code. Please try again.")
                     os.remove(file_path) # remove the file if there is an error
