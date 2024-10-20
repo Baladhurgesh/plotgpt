@@ -7,7 +7,7 @@ import os
 import json
 
 from dotenv import load_dotenv
-
+from curl_response import get_chat_completion
 # Load environment variables from .env file
 load_dotenv()
 # Title of the web app
@@ -129,7 +129,8 @@ def main():
             # Display the columns in the dataset
             st.write(df.columns.tolist())
             for user_input in user_input_gpt:
-                text, prompt = groq_call(user_input, df)
+                # text, prompt = groq_call(user_input, df)
+                text,prompt = get_chat_completion(user_input, df)
                 try:
                     file_path, code_temp = create_python_file(text)
                     skip = False
@@ -188,7 +189,8 @@ def main():
                 # Display the columns in the dataset
                 st.write("Columns in the dataset:")
                 st.write(df.columns.tolist())
-                text, prompt = groq_call(user_input, df)
+                # text, prompt = groq_call(user_input, df)
+                text, prompt = get_chat_completion(user_input, df)
                 file_path, code_temp = create_python_file(text)
                 base_path = os.path.basename(file_path)[:-3]
 
