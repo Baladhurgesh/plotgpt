@@ -1,0 +1,202 @@
+[
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : User Behavior Class Breakdown by Device Model.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Get the count of each User Behavior Class for each Device Model\nbehavior_breakdown = df.groupby(['Device Model', 'User Behavior Class']).size().unstack()\n\n# Create the plot\nbehavior_breakdown.plot(kind='bar', figsize=(10,6), stacked=True)\n\n# Show the plot\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : App Usage Time Distribution by User Behavior Class.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group by 'User Behavior Class' and plot the distribution of 'App Usage Time (min/day)'\ndf.groupby('User Behavior Class')['App Usage Time (min/day)'].plot(kind='box')\nplt.title('App Usage Time Distribution by User Behavior Class')\nplt.xlabel('User Behavior Class')\nplt.ylabel('App Usage Time (min/day)')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Operating System vs Data Usage.",
+        "output": "'''\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create a scatter plot of Operating System vs Data Usage\nplt.figure(figsize=(10,6))\nplt.scatter(df['Operating System'], df['Data Usage (MB/day)'])\nplt.xlabel('Operating System')\nplt.ylabel('Data Usage (MB/day)')\nplt.title('Operating System vs Data Usage')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Age vs Data Usage.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the plot\nplt.scatter(df['Age'], df['Data Usage (MB/day)'])\n\n# Add title and labels\nplt.title('Age vs Data Usage')\nplt.xlabel('Age')\nplt.ylabel('Data Usage (MB/day)')\n\n# Show the plot\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Number of Apps Installed Distribution.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('dataset.csv')\n\nplt.figure(figsize=(10,6))\ndf['Number of Apps Installed'].plot(kind='hist', bins=50)\nplt.xlabel('Number of Apps Installed')\nplt.ylabel('Frequency')\nplt.title('Distribution of Number of Apps Installed')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Gender Distribution.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('dataset.csv')\n\ngender_counts = df['Gender'].value_counts()\n\nplt.figure(figsize=(10,6))\nplt.bar(gender_counts.index, gender_counts.values, color ='maroon')\nplt.xlabel(\"Gender\")\nplt.ylabel(\"Count\")\nplt.title(\"Gender Distribution\")\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Number of Apps Installed vs Data Usage.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndata = pd.read_csv('dataset.csv')\n\nplt.figure(figsize=(10,6))\nplt.scatter(data['Number of Apps Installed'], data['Data Usage (MB/day)'])\nplt.xlabel('Number of Apps Installed')\nplt.ylabel('Data Usage (MB/day)')\nplt.title('Number of Apps Installed vs Data Usage')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Battery Drain Distribution.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create a histogram of Battery Drain Distribution\nplt.hist(df['Battery Drain (mAh/day)'], bins=50, edgecolor='black')\nplt.xlabel('Battery Drain (mAh/day)')\nplt.ylabel('Frequency')\nplt.title('Battery Drain Distribution')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Data Usage vs Battery Drain.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the scatter plot\nplt.scatter(df['Data Usage (MB/day)'], df['Battery Drain (mAh/day)'])\n\n# Add title and labels\nplt.title('Data Usage vs Battery Drain')\nplt.xlabel('Data Usage (MB/day)')\nplt.ylabel('Battery Drain (mAh/day)')\n\n# Show the plot\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : App Usage Time vs Screen On Time.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the plot\nplt.scatter(df['App Usage Time (min/day)'], df['Screen On Time (hours/day)'])\nplt.xlabel('App Usage Time (min/day)')\nplt.ylabel('Screen On Time (hours/day)')\nplt.title('App Usage Time vs Screen On Time')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : App Usage Time per Age Group.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group by 'Age' and calculate the mean of 'App Usage Time (min/day)'\napp_usage_time_per_age = df.groupby('Age')['App Usage Time (min/day)'].mean()\n\n# Plot the results\nplt.figure(figsize=(10,6))\nplt.plot(app_usage_time_per_age.index, app_usage_time_per_age.values, marker='o')\nplt.xlabel('Age')\nplt.ylabel('Average App Usage Time (min/day)')\nplt.title('App Usage Time per Age Group')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Device Model Popularity.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Get the count of each device model\ndevice_model_counts = df['Device Model'].value_counts()\n\n# Create a bar chart to display the device model popularity\nplt.figure(figsize=(10,6))\nplt.bar(device_model_counts.index, device_model_counts.values)\nplt.xlabel('Device Model')\nplt.ylabel('Count')\nplt.title('Device Model Popularity')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Screen On Time Distribution by User Behavior Class.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group by User Behavior Class and calculate the distribution of Screen On Time\nscreen_on_time_dist = df.groupby('User Behavior Class')['Screen On Time (hours/day)'].describe()\n\n# Plot the distribution\nplt.figure(figsize=(10,6))\nscreen_on_time_dist.plot(kind='bar')\nplt.title('Screen On Time Distribution by User Behavior Class')\nplt.xlabel('User Behavior Class')\nplt.ylabel('Screen On Time (hours/day)')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Age Distribution by User Behavior Class.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create a histogram of age distribution by user behavior class\ndf.groupby('User Behavior Class')['Age'].plot(kind='hist', alpha=0.5, bins=50)\n\n# Set title and labels\nplt.title('Age Distribution by User Behavior Class')\nplt.xlabel('Age')\nplt.ylabel('Frequency')\n\n# Show the plot\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Screen On Time vs Number of Apps Installed.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the plot\nplt.figure(figsize=(10,6))\nplt.scatter(df['Screen On Time (hours/day)'], df['Number of Apps Installed'])\nplt.xlabel('Screen On Time (hours/day)')\nplt.ylabel('Number of Apps Installed')\nplt.title('Screen On Time vs Number of Apps Installed')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Device Model vs Data Usage.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group the data by 'Device Model' and calculate the mean 'Data Usage (MB/day)'\ndata_usage_by_device = df.groupby('Device Model')['Data Usage (MB/day)'].mean()\n\n# Create a bar chart\nplt.figure(figsize=(10,6))\ndata_usage_by_device.plot(kind='bar')\nplt.title('Device Model vs Data Usage (MB/day)')\nplt.xlabel('Device Model')\nplt.ylabel('Mean Data Usage (MB/day)')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Gender vs Battery Drain.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create a boxplot for Gender vs Battery Drain\nplt.figure(figsize=(10,6))\nplt.boxplot([df[df['Gender']=='Male']['Battery Drain (mAh/day)'], df[df['Gender']=='Female']['Battery Drain (mAh/day)']])\nplt.xticks([1, 2], ['Male', 'Female'])\nplt.xlabel('Gender')\nplt.ylabel('Battery Drain (mAh/day)')\nplt.title('Gender vs Battery Drain')\n\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Device Model vs Screen On Time.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create a scatter plot of Device Model vs Screen On Time\nplt.figure(figsize=(10, 6))\nplt.scatter(df['Device Model'], df['Screen On Time (hours/day)'])\n\n# Add title and labels\nplt.title('Device Model vs Screen On Time')\nplt.xlabel('Device Model')\nplt.ylabel('Screen On Time (hours/day)')\n\n# Show the plot\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Number of Apps Installed vs Battery Drain.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the scatter plot\nplt.scatter(df['Number of Apps Installed'], df['Battery Drain (mAh/day)'])\n\n# Add title and labels\nplt.title('Number of Apps Installed vs Battery Drain')\nplt.xlabel('Number of Apps Installed')\nplt.ylabel('Battery Drain (mAh/day)')\n\n# Show the plot\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Operating System vs Screen On Time.",
+        "output": "'''python\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create a boxplot to show the relationship between Operating System and Screen On Time\nplt.figure(figsize=(10,6))\nplt.boxplot([df[df['Operating System'] == os]['Screen On Time (hours/day)'] for os in df['Operating System'].unique()])\nplt.xlabel('Operating System')\nplt.ylabel('Screen On Time (hours/day)')\nplt.title('Operating System vs Screen On Time')\nplt.xticks(range(1, len(df['Operating System'].unique())+1), df['Operating System'].unique())\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : App Usage Time vs Number of Apps Installed.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the plot\nplt.figure(figsize=(10,6))\nplt.scatter(df['App Usage Time (min/day)'], df['Number of Apps Installed'])\nplt.xlabel('App Usage Time (min/day)')\nplt.ylabel('Number of Apps Installed')\nplt.title('App Usage Time vs Number of Apps Installed')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : User Behavior Class vs Age.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Plot User Behavior Class vs Age\nplt.figure(figsize=(10,6))\nplt.scatter(df['Age'], df['User Behavior Class'])\nplt.xlabel('Age')\nplt.ylabel('User Behavior Class')\nplt.title('User Behavior Class vs Age')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Battery Drain vs Age.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the plot\nplt.figure(figsize=(10,6))\nplt.scatter(df['Age'], df['Battery Drain (mAh/day)'])\nplt.xlabel('Age')\nplt.ylabel('Battery Drain (mAh/day)')\nplt.title('Battery Drain vs Age')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Device Model vs Battery Drain.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\ndf = pd.read_csv('dataset.csv')\n\ndevice_models = df['Device Model'].unique()\nbattery_drainmeans = []\n\nfor model in device_models:\n    battery_drainmeans.append(df[df['Device Model'] == model]['Battery Drain (mAh/day)'].mean())\n\nplt.figure(figsize=(10,6))\nplt.bar(device_models, battery_drainmeans)\nplt.xlabel('Device Model')\nplt.ylabel('Average Battery Drain (mAh/day)')\nplt.title('Device Model vs Battery Drain')\nplt.xticks(rotation=90)\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Age vs Screen On Time.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the scatter plot\nplt.scatter(df['Age'], df['Screen On Time (hours/day)'])\n\n# Add title and labels\nplt.title('Age vs Screen On Time')\nplt.xlabel('Age')\nplt.ylabel('Screen On Time (hours/day)')\n\n# Show the plot\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Screen On Time vs Battery Drain.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the plot\nplt.figure(figsize=(10,6))\nplt.scatter(df['Screen On Time (hours/day)'], df['Battery Drain (mAh/day)'])\nplt.xlabel('Screen On Time (hours/day)')\nplt.ylabel('Battery Drain (mAh/day)')\nplt.title('Screen On Time vs Battery Drain')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Battery Drain by Operating System.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group battery drain by operating system and calculate mean\nbattery_drain_by_os = df.groupby('Operating System')['Battery Drain (mAh/day)'].mean()\n\n# Create the plot\nplt.figure(figsize=(10, 6))\nbattery_drain_by_os.plot(kind='bar')\nplt.title('Battery Drain by Operating System')\nplt.xlabel('Operating System')\nplt.ylabel('Battery Drain (mAh/day)')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : App Usage Time vs Age.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the plot\nplt.figure(figsize=(10,6))\nplt.scatter(df['Age'], df['App Usage Time (min/day)'])\nplt.xlabel('Age')\nplt.ylabel('App Usage Time (min/day)')\nplt.title('App Usage Time vs Age')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Age Distribution by Gender.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group by Gender and plot Age distribution\ndf.groupby('Gender')['Age'].plot(kind='hist', figsize=(10,6), alpha=0.5, title='Age Distribution by Gender')\n\nplt.xlabel('Age')\nplt.ylabel('Frequency')\nplt.legend(title='Gender')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Data Usage vs App Usage Time.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create the plot\nplt.scatter(df['App Usage Time (min/day)'], df['Data Usage (MB/day)'])\n\n# Add title and labels\nplt.title('Data Usage vs App Usage Time')\nplt.xlabel('App Usage Time (min/day)')\nplt.ylabel('Data Usage (MB/day)')\n\n# Show the plot\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Distribution of App Usage Time.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\ndata = pd.read_csv('dataset.csv')\n\nplt.figure(figsize=(8, 6))\nplt.hist(data['App Usage Time (min/day)'], bins=50, edgecolor='black')\nplt.title('Distribution of App Usage Time')\nplt.xlabel('App Usage Time (min/day)')\nplt.ylabel('Frequency')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : User Behavior Class Frequency.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Get the frequency of each User Behavior Class\nbehavior_classes = df['User Behavior Class'].value_counts()\n\n# Create a bar plot\nplt.figure(figsize=(10,6))\nbehavior_classes.plot(kind='bar')\nplt.title('User Behavior Class Frequency')\nplt.xlabel('User Behavior Class')\nplt.ylabel('Frequency')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Device Model vs App Usage Time.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group the data by Device Model and calculate the mean App Usage Time\ndevice_model_app_usage = df.groupby('Device Model')['App Usage Time (min/day)'].mean()\n\n# Create a bar chart\nplt.figure(figsize=(10, 6))\ndevice_model_app_usage.plot(kind='bar')\nplt.title('Device Model vs App Usage Time')\nplt.xlabel('Device Model')\nplt.ylabel('App Usage Time (min/day)')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : User Engagement.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Calculate user engagement scores\ndf['User Engagement Score'] = df['App Usage Time (min/day)'] + df['Screen On Time (hours/day)'] * 60\n\n# Create a histogram of user engagement scores\nplt.hist(df['User Engagement Score'], bins=10, edgecolor='black')\nplt.xlabel('User Engagement Score')\nplt.ylabel('Number of Users')\nplt.title('Distribution of User Engagement Scores')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Age vs Battery Drain.",
+        "output": "'''\npython\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Create a scatter plot of Age vs Battery Drain\nplt.figure(figsize=(10,6))\nplt.scatter(df['Age'], df['Battery Drain (mAh/day)'])\nplt.xlabel('Age')\nplt.ylabel('Battery Drain (mAh/day)')\nplt.title('Age vs Battery Drain')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : User Behavior Class vs Gender.",
+        "output": "'''\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndata = pd.read_csv('dataset.csv')\n\n# Count the number of males and females in each User Behavior Class\nbehavior_class_gender = data.groupby(['User Behavior Class', 'Gender']).size().reset_index(name='Count')\n\n# Pivot the data to create a table with User Behavior Class as index, Gender as columns, and Count as values\npivot_table = behavior_class_gender.pivot(index='User Behavior Class', columns='Gender', values='Count')\n\n# Plot the data\npivot_table.plot(kind='bar', figsize=(10, 6))\nplt.title('User Behavior Class vs Gender')\nplt.xlabel('User Behavior Class')\nplt.ylabel('Count')\nplt.legend(title='Gender')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Data Usage by User Behavior Class.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group the data by 'User Behavior Class' and calculate the mean of 'Data Usage (MB/day)'\ndata_usage_by_class = df.groupby('User Behavior Class')['Data Usage (MB/day)'].mean()\n\n# Create a bar chart\nplt.figure(figsize=(10,6))\ndata_usage_by_class.plot(kind='bar')\nplt.title('Data Usage by User Behavior Class')\nplt.xlabel('User Behavior Class')\nplt.ylabel('Data Usage (MB/day)')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Operating System vs App Usage.",
+        "output": "'''\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group the data by Operating System and calculate the mean App Usage Time\nos_app_usage = df.groupby('Operating System')['App Usage Time (min/day)'].mean()\n\n# Create a bar chart\nplt.figure(figsize=(10,6))\nos_app_usage.plot(kind='bar')\nplt.title('Operating System vs App Usage Time')\nplt.xlabel('Operating System')\nplt.ylabel('Mean App Usage Time (min/day)')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Gender vs Data Usage.",
+        "output": "'''\npython\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# Load the dataset\ndf = pd.read_csv('dataset.csv')\n\n# Group the data by Gender and calculate the mean Data Usage\ngender_data_usage = df.groupby('Gender')['Data Usage (MB/day)'].mean()\n\n# Create a bar chart\nplt.figure(figsize=(10,6))\ngender_data_usage.plot(kind='bar')\nplt.title('Gender vs Data Usage')\nplt.xlabel('Gender')\nplt.ylabel('Mean Data Usage (MB/day)')\nplt.show()\n'''"
+    },
+    {
+        "instruction": "",
+        "input": " A dataset contains these columns: ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class']                     python code to do the following : Operating System vs Number of Apps Installed.",
+        "output": "'''\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('dataset.csv')\n\nplt.figure(figsize=(10,6))\nplt.scatter(df['Operating System'], df['Number of Apps Installed'])\nplt.xlabel('Operating System')\nplt.ylabel('Number of Apps Installed')\nplt.title('Operating System vs Number of Apps Installed')\nplt.show()\n'''"
+    }
+]
