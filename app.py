@@ -22,7 +22,7 @@ GROQ_API_KEY2 = os.getenv("GROQ_API_KEY2")
 
 
 def extract_code_blocks(text):
-    print("line 29 text", type(text), text)
+    print("line 25 text", type(text), text)
     text = text.replace("Python", "")
     text = text.replace("python", "")
     # Regular expression pattern to find code blocks surrounded by triple backticks
@@ -61,7 +61,8 @@ def create_python_file(response):
 def groq_call(user_input, df):
     client = Groq(api_key=GROQ_API_KEY)
     prompt =f" A dataset contains these columns: {df.columns.tolist()} \
-                    can you write one python code to create a {user_input} \
+                    can you write one python code to create a {user_input}. Use matplotlib library to create the plot and assume I already have the library installed. \
+                     only givem me the code else I will kill someone if you give extra information or anything else. \
                     Please write ALL the code needed since it will be extracted directly and run from your response.\
                     Always have the csv file name to be 'dataset.csv'\
                     Always start the code with '''python and end with '''"
@@ -73,6 +74,7 @@ def groq_call(user_input, df):
             }
         ],
         model="llama3-70b-8192",
+        # model="llama-3.2-3b-preview",
     )
     text = chat_completion.choices[0].message.content
     return text, prompt
@@ -102,8 +104,13 @@ def main():
             with open(train_data_path, 'w') as f:
                 json.dump(train_data, f)
             if file_path:
-                subprocess.run(command, shell=True)
-                st.image("plot_output.png")
+                result = subprocess.run(command, shell=True)
+                if result.returncode == 0:
+                    st.image("plot_output.png")
+                else:
+                    st.write("Error in running the code. Please try again.")
+                    os.remove(file_path) # remove the file if there is an error
+                    os.remove(train_data_path) # remove the train data if there is an error
             else:
                 st.write("No valid code block found to run.")
             
