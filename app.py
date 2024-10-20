@@ -11,9 +11,11 @@ from curl_response import get_chat_completion
 # Load environment variables from .env file
 load_dotenv()
 # Title of the web app
+
+CUSTOM_MODEL = False
 st.title("PLOT GPT")
 model_name = "llama3-8b-8192"
-model_name = 'llama-3.2-1b-preview'
+# model_name = 'llama-3.2-1b-preview'
 
 # Upload CSV file
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
@@ -22,11 +24,12 @@ from groq import Groq
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_KEY2 = os.getenv("GROQ_API_KEY2")
 
+
 # Radio button for training data generation vs inference
 mode = st.radio("Select mode:", ("Training Data Generation", "Inference"))
 
 def extract_code_blocks(text):
-    print("line 25 text", type(text), text)
+    # print("line 25 text", type(text), text)
     # breakpoint()
     text = text.replace("Python", "")
     text = text.replace("python", "")
@@ -49,15 +52,15 @@ def extract_code_blocks(text):
 def create_python_file(response):
     global model_name
     code_blocks = extract_code_blocks(response)
-    csv_file_path = "user_behavior_dataset.csv"
+    csv_file_path = uploaded_file.name
     filename = f"plot_{uuid.uuid4().hex[:8]}"
     if code_blocks:
         for block in code_blocks:
             print("Found code block:")
-            print(block.strip())
             code_block = block.strip()
             code_block_temp = code_block
             code_block = code_block.replace("dataset.csv", csv_file_path)
+            print("final code_block", code_block)
             
             # Append code_block to save the plot
             png_file_path = os.path.join("png_files", f"{filename}.png")
@@ -76,11 +79,21 @@ def groq_call(user_input, df):
     global model_name
     client = Groq(api_key=GROQ_API_KEY)
     prompt =f" A dataset contains these columns: {df.columns.tolist()} \
-                    python code to do the following : {user_input}. Tips: Use matplotlib library to create the plot and assume I already have the library installed. \
-                    only givem me the code else I will kill someone if you give extra information or anything else. \
-                    Please write ALL the code needed since it will be extracted directly and run from your response.\
-                    Always have the csv file name to be 'dataset.csv'\
-                    Always start the code with '''python and end with '''"
+            COLUMNS are ['User ID', 'Device Model', 'Operating System', 'App Usage Time (min/day)', 'Screen On Time (hours/day)', 'Battery Drain (mAh/day)', 'Number of Apps Installed', 'Data Usage (MB/day)', 'Age', 'Gender', 'User Behavior Class'] . Other columns wont work \
+            python code to do the following : {user_input}. Tips: Use matplotlib library to create the plot and assume I already have the library installed. \
+            only givem me the code else I  will kill someone if you give extra information or anything else. \
+            Please write ALL the code needed since it will be extracted directly and run from your response.\
+            Always have the csv file name to be 'dataset.csv'\
+            Always start the code with '''python and end with '''"
+    print("prompt", prompt)
+    # prompt =f" TASK:Python programming language code to generate plots from given csv file info. A dataset contains these columns: {df.columns.tolist()} \
+    #     python code to do the following : {user_input}. Tips: Use matplotlib library to create the plot and assume I already have the library installed. \
+    #     only give me the python code. \
+    #     Please write ALL the code needed since it will be extracted directly and run from your response.\
+    #     Always have the csv file name to be 'dataset.csv'\
+    #     Only code, no other text or comments. \
+    #     Always start the code with '''python and end with '''"
+    
     chat_completion = client.chat.completions.create(
         messages=[
             {
@@ -128,9 +141,15 @@ def main():
             st.write(df.head())
             # Display the columns in the dataset
             st.write(df.columns.tolist())
+
             for user_input in user_input_gpt:
+                print("COLUMNS", df.columns.tolist())
+
                 # text, prompt = groq_call(user_input, df)
-                text,prompt = get_chat_completion(user_input, df)
+                if CUSTOM_MODEL:
+                    text,prompt = get_chat_completion(user_input, df)
+                else:
+                    text, prompt = groq_call(user_input, df)
                 try:
                     file_path, code_temp = create_python_file(text)
                     skip = False
@@ -156,10 +175,10 @@ def main():
                     else:
                         st.write("Error in running the code. Please try again.")
                         
-                        if os.path.exists(file_path):  # Check if the file exists
-                            os.remove(file_path)  # Remove the file if there is an error
-                        if os.path.exists(train_data_path):
-                            os.remove(train_data_path) # remove the train data if there is an error
+                        # if os.path.exists(file_path):  # Check if the file exists
+                        #     os.remove(file_path)  # Remove the file if there is an error
+                        # if os.path.exists(train_data_path):
+                        #     os.remove(train_data_path) # remove the train data if there is an error
                 else:
                     st.write("No valid code block found to run.")
                 
@@ -190,7 +209,10 @@ def main():
                 st.write("Columns in the dataset:")
                 st.write(df.columns.tolist())
                 # text, prompt = groq_call(user_input, df)
-                text, prompt = get_chat_completion(user_input, df)
+                if CUSTOM_MODEL:
+                    text, prompt = get_chat_completion(user_input, df)
+                else:
+                    text, prompt = groq_call(user_input, df)
                 file_path, code_temp = create_python_file(text)
                 base_path = os.path.basename(file_path)[:-3]
 
