@@ -37,6 +37,7 @@ def extract_code_blocks(text):
 def create_python_file(response):
     code_blocks = extract_code_blocks(response)
     csv_file_path = "user_behavior_dataset.csv"
+    filename = f"plot_{uuid.uuid4().hex[:8]}"
     if code_blocks:
         for block in code_blocks:
             print("Found code block:")
@@ -47,8 +48,8 @@ def create_python_file(response):
             code_block = code_block.replace("dataset.csv", csv_file_path)
             
             # Append code_block to save the plot
-            code_block += "\nplt.savefig('plot_output.png')"
-    filename = f"plot_{uuid.uuid4().hex[:8]}"
+            code_block += '\nplt.savefig(f"{filename}.png")'
+    
     if code_block is not None:
     # Open the file in write mode ('w') which will overwrite the file if it already exists
         file_path = os.path.join("code_files", f"{filename}.py")
@@ -84,9 +85,30 @@ def main():
         # Read the file into a pandas DataFrame
         df = pd.read_csv(uploaded_file)
         user_input = st.text_input("Enter some text:")
-
+        user_input_gpt = [
+                "Histogram of Student Grades",
+                "Bar Plot of Average Grades by Gender",
+                "Scatter Plot of Study Hours vs. Grades",
+                "Box Plot of Grades by Parental Education Level",
+                "Correlation Heatmap of All Numeric Features",
+                "Bar Plot of Attendance by Gender",
+                "Pie Chart of Students by Socioeconomic Status",
+                "Line Plot of Grade Progression Over Time",
+                "Stacked Bar Plot of Grades by Study Methods",
+                "Box Plot of Grades by Study Group Participation",
+                "Scatter Plot of Internet Usage vs. Grades",
+                "Bar Plot of Average Grades by School Type",
+                "Violin Plot of Grades by Parental Involvement",
+                "Pair Plot of Multiple Variables (Study Hours, Grades, Attendance)",
+                "Density Plot of Hours of Sleep by Gender",
+                "Stacked Bar Plot of Extracurricular Activities vs. Grades",
+                "Pie Chart of Students’ Preferred Learning Styles",
+                "Bar Plot of Average Grades by Classroom Size",
+                "Heatmap of Study Environment Ratings vs. Performance",
+                "Line Plot of Grades Over Time by Gender"
+            ]
         # Display the dataframe
-        if user_input:
+        for user_input in user_input_gpt:
             st.write("Here is a preview of the dataset:")
             st.write(df.head())
 
@@ -118,7 +140,7 @@ def main():
             st.write("Summary Statistics:")
             st.write(df.describe())
             
-
+            break
         else:
             st.write("Please upload a CSV file to get started.")
 
