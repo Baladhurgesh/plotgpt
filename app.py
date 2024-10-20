@@ -5,30 +5,38 @@ import uuid
 import subprocess
 import os 
 import json
+
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 # Title of the web app
 st.title("PLOT GPT")
 
 # Upload CSV file
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 from groq import Groq
-GROQ_API_KEY = ''
 
-
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY2 = os.getenv("GROQ_API_KEY2")
 
 
 def extract_code_blocks(text):
+    print("line 29 text", type(text), text)
+    text = text.replace("Python", "")
+    text = text.replace("python", "")
     # Regular expression pattern to find code blocks surrounded by triple backticks
-    pattern = r"'''python(.*?)'''"
-
+    pattern = r"'''(.*)"
+    pattern2 = r"(.*)'''"
     # Using re.DOTALL to make the dot match newlines as well
     matches = re.findall(pattern, text, re.DOTALL)
-
+    matches2 = re.findall(pattern2, matches[0], re.DOTALL)
     # 'matches' will be a list of all the code blocks found in the text
-    return matches
+    return matches2
 
 def create_python_file(response):
     code_blocks = extract_code_blocks(response)
-    csv_file_path = "/Users/bala/Downloads/user_behavior_dataset.csv"
+    csv_file_path = "user_behavior_dataset.csv"
     if code_blocks:
         for block in code_blocks:
             print("Found code block:")
@@ -64,7 +72,7 @@ def groq_call(user_input, df):
                 "content": prompt,
             }
         ],
-        model="llama3-8b-8192",
+        model="llama3-70b-8192",
     )
     text = chat_completion.choices[0].message.content
     return text, prompt
@@ -89,6 +97,8 @@ def main():
             train_data = {"instruction": prompt,"input": "","output": code_temp}
             base_path = os.path.basename(file_path)[:-3]
             train_data_path = os.path.join("train_data", f"train_data_{base_path}.json")
+            if not os.path.exists("train_data"):
+                os.makedirs("train_data", exist_ok=True)
             with open(train_data_path, 'w') as f:
                 json.dump(train_data, f)
             if file_path:
